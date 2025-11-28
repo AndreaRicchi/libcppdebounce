@@ -2,13 +2,15 @@
 Checks:
   -*,
   bugprone-*,
+  -bugprone-easily-swappable-parameters,
   clang-*,
   google-*,
   modernize-*,
   performance-*,
   portability-*,
   readability-*,
-  -readability-function-cognitive-complexity
+  -readability-function-cognitive-complexity,
+  -readability-identifier-length
 
 WarningsAsErrors: '*'
 
@@ -19,16 +21,12 @@ CheckOptions:
     value: ''
   - key: readability-identifier-naming.StaticVariableSuffix
     value: ''
-  - key: readability-identifier-naming.VariableCase
-    value: lower_case
-  - key: readability-identifier-naming.GlobalVariableCase
-    value: lower_case
   - key: readability-identifier-naming.PrivateMemberCase
-    value: lower_case
-  - key: readability-identifier-naming.PublicMemberCase
     value: lower_case
   - key: readability-identifier-naming.PrivateMemberSuffix
     value: '_'
+  - key: readability-identifier-naming.PublicMemberCase
+    value: lower_case
   - key: readability-identifier-naming.ParameterCase
     value: lower_case
   - key: readability-identifier-naming.LocalVariableCase

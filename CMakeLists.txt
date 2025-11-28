@@ -17,6 +17,7 @@ set(PROJECT_NAME_UPPER
 include(project-is-top-level)
 include(variables)
 
+option(${PROJECT_NAME_UPPER}_TEST "Build test target" ON)
 option(${PROJECT_NAME_UPPER}_EXAMPLE "Build example target" ON)
 
 # ---- Library ----
@@ -38,6 +39,13 @@ target_compile_features(${PROJECT_NAME}_${PROJECT_NAME} INTERFACE cxx_std_17)
 
 if(NOT CMAKE_SKIP_INSTALL_RULES)
   include(install-rules)
+endif()
+
+# ---- Tests ----
+
+if(${PROJECT_NAME_UPPER}_TEST)
+  enable_testing()
+  add_subdirectory(test)
 endif()
 
 # ---- Example ----
