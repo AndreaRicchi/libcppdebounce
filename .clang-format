@@ -1,0 +1,28 @@
+---
+BasedOnStyle: Google
+
+SortIncludes: true
+
+# This section defines the categories for sorting the other includes.
+# Lower priority numbers are placed first.
+IncludeCategories:
+  # C System Headers (e.g., <unistd.h>, <sys/types.h>)
+  - Regex:           '^<.*\.h>'
+    Priority:        2
+
+  # C++ Standard Library and other angle-bracket headers (e.g., <vector>, <string>)
+  - Regex:            '^<[^>/]+>$'
+    Priority:        3
+
+  # Third-party library headers (e.g., <third_party/foo.h>)
+  - Regex:           '^(<)[^>]+/[^>]+(>)$'
+    Priority:        4
+
+  # Third-party library headers (e.g., "third_party/foo.h")
+  - Regex:           '^".*/.*'
+    Priority:        5
+
+  # Project headers.
+  - Regex:           '.*'
+    Priority:        6
+...

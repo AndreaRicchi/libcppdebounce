@@ -1,0 +1,39 @@
+fail_fast: false
+
+repos:
+  - repo: 'https://github.com/pre-commit/pre-commit-hooks'
+    rev: 'v6.0.0'
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-xml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+        args: [ --markdown-linebreak-ext=md ]
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: 'v21.1.0'
+    hooks:
+      - id: clang-format
+        args: ["-style=file"]
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.36.2
+    hooks:
+      - id: typos
+  - repo: local
+    hooks:
+      - id: cmake-format
+        name: cmake-format
+        language: system
+        entry: cmake-format -i
+        types: [cmake]
+  - repo: local
+    hooks:
+      - id: clang-tidy
+        name: clang-tidy
+        language: system
+        entry: clang-tidy -config-file .clang-tidy -p build/
+        types: [c++]
