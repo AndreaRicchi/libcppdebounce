@@ -1,0 +1,52 @@
+name: Continuous Integration
+
+on:
+  workflow_dispatch:
+  pull_request: {}
+  push: { branches: [main] }
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v5
+      with: { python-version: "3.12" }
+
+    - name: Install linters
+      run: >-
+        sudo apt-get install clang-format cmake-format -y -q
+
+    - uses: pre-commit/action@v3.0.1
+      with:
+        extra_args: --all-files --show-diff-on-failure
+      env:
+        SKIP: clang-tidy
+
+  test:
+    needs: [lint]
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install static analyzers
+      run: >-
+        sudo apt-get install clang-tidy -y -q
+
+    - name: Configure
+      run: cmake -S . -B build -DCPPDEBOUNCE_TEST=ON -DCPPDEBOUNCE_EXAMPLE=ON
+
+    - name: Build
+      run: cmake --build build --target all
+
+    - name: Test
+      working-directory: build
+      run: ctest --output-on-failure --no-tests=error -C Release -j 2
+
+    - name: Analyze
+      uses: pre-commit/action@v3.0.1
+      with:
+        extra_args: clang-tidy --all-files --show-diff-on-failure
