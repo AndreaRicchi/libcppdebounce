@@ -22,7 +22,7 @@ if(PROJECT_IS_TOP_LEVEL)
 endif()
 add_custom_target(run-tests)
 
-function(add_test NAME)
+function(add_gtest NAME)
   add_executable("${NAME}" "${NAME}.cpp")
   target_link_libraries("${NAME}" PRIVATE cppdebounce::cppdebounce
                                           GTest::gtest_main)
@@ -36,6 +36,7 @@ function(add_test NAME)
   gtest_discover_tests("${NAME}")
 endfunction()
 
-add_test(throttle_test)
+add_gtest(throttle_test)
+add_gtest(debounce_test)
 
 add_folders(Test)
