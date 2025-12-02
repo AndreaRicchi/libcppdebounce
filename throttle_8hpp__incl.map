@@ -1,0 +1,21 @@
+<map id="include/libcppdebounce/throttle.hpp" name="include/libcppdebounce/throttle.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="430,5,605,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,72,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="430,40,274,63,86,96,85,91,273,58,429,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="97,93,239,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="434,48,233,93,232,88,433,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="263,93,350,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="468,48,351,91,350,86,466,43"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="375,93,455,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="494,48,442,87,439,83,491,43"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="479,93,556,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="520,46,520,79,515,79,515,46"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="580,93,644,119"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="542,43,589,82,585,86,539,48"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="668,93,727,119"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="562,43,659,85,657,90,559,48"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="751,93,815,119"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="582,43,738,89,737,94,580,48"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="839,93,963,119"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="605,42,832,88,831,93,604,47"/>
+</map>
