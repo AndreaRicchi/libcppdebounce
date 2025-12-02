@@ -50,3 +50,30 @@ jobs:
       uses: pre-commit/action@v3.0.1
       with:
         extra_args: clang-tidy --all-files --show-diff-on-failure
+
+  docs:
+    needs: [test]
+
+    runs-on: ubuntu-24.04
+
+    if: github.ref == 'refs/heads/main'
+      && github.repository_owner == 'AndreaRicchi'
+
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Doxygen
+      run: sudo apt-get update -q
+        && sudo apt-get install doxygen graphviz -q -y
+
+    - name: Build docs
+      run: mkdir -p build/ && doxygen docs/Doxyfile
+
+    - name: Deploy docs
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: build/docs/html

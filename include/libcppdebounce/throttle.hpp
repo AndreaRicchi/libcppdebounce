@@ -10,6 +10,11 @@
 #include <thread>
 #include <unordered_map>
 
+/**
+ * @brief Throttle
+ * First call is executed immediately,
+ * all subsequent calls are ignored for a fixed time interval.
+ */
 class Throttle {
  public:
   using ThrottleCallback = std::function<void()>;

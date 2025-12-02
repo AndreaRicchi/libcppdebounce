@@ -10,6 +10,11 @@
 #include <thread>
 #include <unordered_map>
 
+/**
+ * @brief Debounce
+ * Execution is deferred until calls stop,
+ * repeated calls reset the delay.
+ */
 class Debounce {
  public:
   using DebounceCallback = std::function<void()>;
