@@ -1,6 +1,6 @@
 if(PROJECT_IS_TOP_LEVEL)
   set(CMAKE_INSTALL_INCLUDEDIR
-      "include/${PROJECT_NAME}-${PROJECT_VERSION}"
+      "include/cppdebounce-${PROJECT_VERSION}"
       CACHE STRING "")
   set_property(CACHE CMAKE_INSTALL_INCLUDEDIR PROPERTY TYPE PATH)
 endif()
@@ -14,16 +14,16 @@ include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
 # find_package(<package>) call for consumers to find this project
-set(package ${PROJECT_NAME})
+set(package cppdebounce)
 
 install(
   DIRECTORY include/
   DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
-  COMPONENT ${PROJECT_NAME}_Development)
+  COMPONENT cppdebounce_Development)
 
 install(
-  TARGETS ${PROJECT_NAME}_${PROJECT_NAME}
-  EXPORT ${PROJECT_NAME}Targets
+  TARGETS cppdebounce_cppdebounce
+  EXPORT cppdebounceTargets
   INCLUDES
   DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
@@ -32,28 +32,28 @@ write_basic_package_version_file(
                                                 ARCH_INDEPENDENT)
 
 # Allow package maintainers to freely override the path for the configs
-set(${PROJECT_NAME}_INSTALL_CMAKEDIR
+set(cppdebounce_INSTALL_CMAKEDIR
     "${CMAKE_INSTALL_DATADIR}/${package}"
     CACHE STRING "CMake package config location relative to the install prefix")
-set_property(CACHE ${PROJECT_NAME}_INSTALL_CMAKEDIR PROPERTY TYPE PATH)
-mark_as_advanced(${PROJECT_NAME}_INSTALL_CMAKEDIR)
+set_property(CACHE cppdebounce_INSTALL_CMAKEDIR PROPERTY TYPE PATH)
+mark_as_advanced(cppdebounce_INSTALL_CMAKEDIR)
 
 install(
   FILES cmake/install-config.cmake
-  DESTINATION "${${PROJECT_NAME}_INSTALL_CMAKEDIR}"
+  DESTINATION "${cppdebounce_INSTALL_CMAKEDIR}"
   RENAME "${package}Config.cmake"
-  COMPONENT ${PROJECT_NAME}_Development)
+  COMPONENT cppdebounce_Development)
 
 install(
   FILES "${PROJECT_BINARY_DIR}/${package}ConfigVersion.cmake"
-  DESTINATION "${${PROJECT_NAME}_INSTALL_CMAKEDIR}"
-  COMPONENT ${PROJECT_NAME}_Development)
+  DESTINATION "${cppdebounce_INSTALL_CMAKEDIR}"
+  COMPONENT cppdebounce_Development)
 
 install(
-  EXPORT ${PROJECT_NAME}Targets
-  NAMESPACE ${PROJECT_NAME}::
-  DESTINATION "${${PROJECT_NAME}_INSTALL_CMAKEDIR}"
-  COMPONENT ${PROJECT_NAME}_Development)
+  EXPORT cppdebounceTargets
+  NAMESPACE cppdebounce::
+  DESTINATION "${cppdebounce_INSTALL_CMAKEDIR}"
+  COMPONENT cppdebounce_Development)
 
 if(PROJECT_IS_TOP_LEVEL)
   include(CPack)

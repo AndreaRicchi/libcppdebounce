@@ -11,11 +11,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # or FetchContent is used to consume this project
 set(warning_guard "")
 if(NOT PROJECT_IS_TOP_LEVEL)
-  option(
-    ${PROJECT_NAME}_INCLUDES_WITH_SYSTEM
-    "Use SYSTEM modifier for ${PROJECT_NAME}'s includes, disabling warnings" ON)
-  mark_as_advanced(${PROJECT_NAME}_INCLUDES_WITH_SYSTEM)
-  if(${PROJECT_NAME}_INCLUDES_WITH_SYSTEM)
+  option(cppdebounce_INCLUDES_WITH_SYSTEM
+         "Use SYSTEM modifier for cppdebounce's includes, disabling warnings"
+         ON)
+  mark_as_advanced(cppdebounce_INCLUDES_WITH_SYSTEM)
+  if(cppdebounce_INCLUDES_WITH_SYSTEM)
     set(warning_guard SYSTEM)
   endif()
 endif()
