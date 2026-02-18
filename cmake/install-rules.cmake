@@ -33,7 +33,7 @@ write_basic_package_version_file(
 
 # Allow package maintainers to freely override the path for the configs
 set(cppdebounce_INSTALL_CMAKEDIR
-    "${CMAKE_INSTALL_DATADIR}/${package}"
+    "${CMAKE_INSTALL_LIBDIR}/cmake/${package}"
     CACHE STRING "CMake package config location relative to the install prefix")
 set_property(CACHE cppdebounce_INSTALL_CMAKEDIR PROPERTY TYPE PATH)
 mark_as_advanced(cppdebounce_INSTALL_CMAKEDIR)
