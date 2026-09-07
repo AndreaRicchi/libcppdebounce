@@ -17,7 +17,8 @@ jobs:
 
     - name: Install linters
       run: >-
-        sudo apt-get install clang-format cmake-format -y -q
+        sudo apt-get update -q
+        && sudo apt-get install clang-format cmake-format -y -q
 
     - uses: pre-commit/action@v3.0.1
       with:
@@ -34,17 +35,20 @@ jobs:
 
     - name: Install static analyzers
       run: >-
-        sudo apt-get install clang-tidy -y -q
+        sudo apt-get update -q
+        && sudo apt-get install clang-tidy -y -q
 
     - name: Configure
-      run: cmake -S . -B build -DCPPDEBOUNCE_TEST=ON -DCPPDEBOUNCE_EXAMPLE=ON
+      run: cmake --preset host-release
 
     - name: Build
-      run: cmake --build build --target all
+      run: cmake --build --preset host-release
 
     - name: Test
-      working-directory: build
-      run: ctest --output-on-failure --no-tests=error -C Release -j 2
+      run: ctest --preset host-release -j 2
+
+    - name: Configure for clang-tidy
+      run: cmake --preset host-debug
 
     - name: Analyze
       uses: pre-commit/action@v3.0.1
