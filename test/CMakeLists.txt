@@ -13,6 +13,7 @@ set(gtest_force_shared_crt
     CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cmake")
 include(project-is-top-level)
 include(folders)
 include(GoogleTest)

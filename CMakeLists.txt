@@ -17,8 +17,11 @@ set(PROJECT_NAME_UPPER
 include(project-is-top-level)
 include(variables)
 
-option(${PROJECT_NAME_UPPER}_TEST "Build test target" ON)
-option(${PROJECT_NAME_UPPER}_EXAMPLE "Build example target" ON)
+# Tests and examples are for developing this project; consumers that pull it in
+# with add_subdirectory/FetchContent get neither unless they opt in.
+option(${PROJECT_NAME_UPPER}_TEST "Build test target" ${PROJECT_IS_TOP_LEVEL})
+option(${PROJECT_NAME_UPPER}_EXAMPLE "Build example target"
+       ${PROJECT_IS_TOP_LEVEL})
 
 # ---- Library ----
 
@@ -50,8 +53,6 @@ endif()
 
 # ---- Example ----
 
-if(PROJECT_IS_TOP_LEVEL)
-  if(${PROJECT_NAME_UPPER}_EXAMPLE)
-    add_subdirectory(example)
-  endif()
+if(${PROJECT_NAME_UPPER}_EXAMPLE)
+  add_subdirectory(example)
 endif()
