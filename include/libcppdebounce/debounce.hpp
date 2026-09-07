@@ -34,7 +34,7 @@ class Debounce {
    * If called again with the same tag before duration expires, the previous
    * call is cancelled and the timer restarts. The callback runs at the END of
    * the duration.
-   * * @param tag Unique identifier.
+   * @param tag Unique identifier.
    * @param duration Time to wait before executing.
    * @param on_execute The function to execute after the silence period.
    */
@@ -89,6 +89,7 @@ class Debounce {
   /**
    * @brief Cancels any pending debounce operation for the tag.
    * The callback will never run.
+   * @param tag Unique identifier.
    */
   static void cancel(const std::string& tag) {
     std::scoped_lock lock(_global_mutex);
@@ -107,6 +108,11 @@ class Debounce {
     }
   }
 
+  /**
+   * @brief Checks whether a debounce operation is pending for the tag.
+   * @param tag Unique identifier.
+   * @return true if a callback is scheduled and has not run yet.
+   */
   static auto is_pending(const std::string& tag) -> bool {
     std::scoped_lock lock(_global_mutex);
     return _operations.find(tag) != _operations.end();

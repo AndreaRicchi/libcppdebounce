@@ -32,7 +32,7 @@ class Throttle {
 
   /**
    * @brief Throttles execution based on a tag and duration.
-   *  @param tag Unique identifier for the operation.
+   * @param tag Unique identifier for the operation.
    * @param duration Time to ignore subsequent calls.
    * @param on_execute Function to run immediately.
    * @param on_after (Optional) Function to run after duration expires.
@@ -98,7 +98,7 @@ class Throttle {
 
   /**
    * @brief Manually cancels a throttle operation.
-   *  @param tag Unique identifier for the operation.
+   * @param tag Unique identifier for the operation.
    * The on_after callback will NOT be executed.
    */
   static auto cancel(const std::string& tag) -> void {
@@ -118,6 +118,11 @@ class Throttle {
     }
   }
 
+  /**
+   * @brief Checks whether the tag is currently throttled.
+   * @param tag Unique identifier for the operation.
+   * @return true if calls with this tag are being ignored.
+   */
   static auto is_active(const std::string& tag) -> bool {
     std::scoped_lock lock(_global_mutex);
     return _operations.find(tag) != _operations.end();
