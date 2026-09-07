@@ -35,5 +35,5 @@ repos:
       - id: clang-tidy
         name: clang-tidy
         language: system
-        entry: clang-tidy -config-file .clang-tidy -p build/
+        entry: clang-tidy -config-file .clang-tidy -p build/host-debug/
         types: [c++]

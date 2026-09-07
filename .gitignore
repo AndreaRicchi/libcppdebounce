@@ -1,7 +1,6 @@
 build/
 cmake-build-*/
 .cache/
-.clangd
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,cmake,c++,clion+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,cmake,c++,clion+all
