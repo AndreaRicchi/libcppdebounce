@@ -56,15 +56,8 @@ jobs:
         extra_args: clang-tidy --all-files --show-diff-on-failure
 
   docs:
-    needs: [test]
-
+    needs: [lint]
     runs-on: ubuntu-24.04
-
-    if: github.ref == 'refs/heads/main'
-      && github.repository_owner == 'AndreaRicchi'
-
-    permissions:
-      contents: write
 
     steps:
     - uses: actions/checkout@v4
@@ -76,8 +69,29 @@ jobs:
     - name: Build docs
       run: mkdir -p build/ && doxygen docs/Doxyfile
 
-    - name: Deploy docs
-      uses: peaceiris/actions-gh-pages@v4
+    - uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: build/docs/html
+        path: build/docs/html
+
+  deploy-docs:
+    needs: [test, docs]
+    runs-on: ubuntu-24.04
+
+    if: github.ref == 'refs/heads/main'
+      && github.repository_owner == 'AndreaRicchi'
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+
+    steps:
+    - id: deployment
+      uses: actions/deploy-pages@v4
