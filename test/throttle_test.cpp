@@ -9,6 +9,8 @@
 
 #include "deadlock_hammer.hpp"
 
+using cppdebounce::Throttle;
+
 using namespace std::chrono_literals;
 
 class ThrottleTest : public ::testing::Test {

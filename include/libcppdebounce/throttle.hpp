@@ -3,12 +3,13 @@
 #include <chrono>
 #include <condition_variable>
 #include <functional>
-#include <iostream>
 #include <memory>
 #include <mutex>
 #include <string>
 #include <thread>
 #include <unordered_map>
+
+namespace cppdebounce {
 
 /**
  * @brief Throttle
@@ -122,7 +123,10 @@ class Throttle {
     return _operations.find(tag) != _operations.end();
   }
 
-  // Test helper: Clear all state (Not thread safe, use only between tests)
+  /**
+   * @brief Cancels every pending operation.
+   * Test-only helper for isolating test cases; not part of the supported API.
+   */
   static void reset_for_testing() {
     std::lock_guard<std::mutex> lock(_global_mutex);
     for (auto& [tag, op] : _operations) {
@@ -145,3 +149,5 @@ inline std::unordered_map<std::string,
                           std::shared_ptr<Throttle::ThrottleOperation>>
     Throttle::_operations;
 inline std::mutex Throttle::_global_mutex;
+
+}  // namespace cppdebounce

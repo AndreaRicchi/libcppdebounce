@@ -2,6 +2,8 @@
 
 #include "libcppdebounce/debounce.hpp"
 
+using cppdebounce::Debounce;
+
 // NOLINTBEGIN(readability-magic-numbers)
 
 void onSearchInput(const std::string& text) {

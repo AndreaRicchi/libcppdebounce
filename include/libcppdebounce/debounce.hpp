@@ -3,12 +3,13 @@
 #include <chrono>
 #include <condition_variable>
 #include <functional>
-#include <iostream>
 #include <memory>
 #include <mutex>
 #include <string>
 #include <thread>
 #include <unordered_map>
+
+namespace cppdebounce {
 
 /**
  * @brief Debounce
@@ -111,6 +112,10 @@ class Debounce {
     return _operations.find(tag) != _operations.end();
   }
 
+  /**
+   * @brief Cancels every pending operation.
+   * Test-only helper for isolating test cases; not part of the supported API.
+   */
   static void reset_for_testing() {
     std::lock_guard<std::mutex> lock(_global_mutex);
     for (auto& [tag, op] : _operations) {
@@ -133,3 +138,5 @@ inline std::unordered_map<std::string,
                           std::shared_ptr<Debounce::DebounceOperation>>
     Debounce::_operations;
 inline std::mutex Debounce::_global_mutex;
+
+}  // namespace cppdebounce

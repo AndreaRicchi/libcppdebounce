@@ -9,6 +9,8 @@
 
 #include "deadlock_hammer.hpp"
 
+using cppdebounce::Debounce;
+
 using namespace std::chrono_literals;
 
 class DebounceTest : public ::testing::Test {

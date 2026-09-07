@@ -2,6 +2,8 @@
 
 #include "libcppdebounce/throttle.hpp"
 
+using cppdebounce::Throttle;
+
 // NOLINTBEGIN(readability-magic-numbers)
 
 auto main() -> int {
