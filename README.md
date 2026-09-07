@@ -4,6 +4,8 @@
 
 Header-only C++17 library for safe **throttling** and **debouncing** using only the standard library.
 
+📖 [API documentation](https://andrearicchi.github.io/libcppdebounce/)
+
 `libcppdebounce` provides two lightweight utilities:
 
 | Feature | Behavior |
