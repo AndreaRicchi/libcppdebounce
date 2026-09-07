@@ -67,6 +67,8 @@ class Debounce {
         return;
       }
 
+      op_lock.unlock();
+
       {
         std::unique_lock<std::mutex> global_lock(_global_mutex);
 

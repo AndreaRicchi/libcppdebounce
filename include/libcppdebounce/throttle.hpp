@@ -70,6 +70,8 @@ class Throttle {
         return;
       }
 
+      op_lock.unlock();
+
       {
         std::lock_guard<std::mutex> global_lock(_global_mutex);
 

@@ -2,6 +2,13 @@
 
 #include <gtest/gtest.h>
 
+#include <atomic>
+#include <chrono>
+#include <thread>
+#include <vector>
+
+#include "deadlock_hammer.hpp"
+
 using namespace std::chrono_literals;
 
 class ThrottleTest : public ::testing::Test {
@@ -108,4 +115,11 @@ TEST_F(ThrottleTest, ThreadSafetyStressTest) {
 
   EXPECT_EQ(success_count, 1)
       << "Exactly one thread should have succeeded in acquiring the lock";
+}
+
+TEST_F(ThrottleTest, ConcurrentExpiryAndCancelDoesNotDeadlock) {
+  hammer_without_deadlock([]() -> void {
+    Throttle::throttle("deadlock_tag", 0ms, []() -> void {}, []() -> void {});
+    Throttle::cancel("deadlock_tag");
+  });
 }

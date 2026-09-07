@@ -2,6 +2,13 @@
 
 #include <gtest/gtest.h>
 
+#include <atomic>
+#include <chrono>
+#include <thread>
+#include <vector>
+
+#include "deadlock_hammer.hpp"
+
 using namespace std::chrono_literals;
 
 class DebounceTest : public ::testing::Test {
@@ -93,6 +100,12 @@ TEST_F(DebounceTest, RapidFireOnlyRunsLast) {
 
   EXPECT_EQ(run_count, 1)
       << "Even after 100 rapid calls, only the final one should execute";
+}
+
+TEST_F(DebounceTest, ConcurrentExpiryAndRescheduleDoesNotDeadlock) {
+  hammer_without_deadlock([]() -> void {
+    Debounce::debounce("deadlock_tag", 0ms, []() -> void {});
+  });
 }
 
 auto main(int argc, char** argv) -> int {
