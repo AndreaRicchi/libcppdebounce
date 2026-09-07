@@ -8,6 +8,7 @@ Checks:
   modernize-*,
   performance-*,
   portability-*,
+  -portability-avoid-pragma-once,
   readability-*,
   -readability-function-cognitive-complexity,
   -readability-identifier-length
@@ -63,5 +64,7 @@ CheckOptions:
     value: CamelCase
   - key: readability-identifier-naming.EnumConstantPrefix
     value: 'k'
+  - key: modernize-use-trailing-return-type.TransformLambdas
+    value: none
   - key: readability-identifier-naming.NamespaceCase
     value: lower_case

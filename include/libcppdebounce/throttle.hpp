@@ -74,7 +74,7 @@ class Throttle {
       op_lock.unlock();
 
       {
-        std::lock_guard<std::mutex> global_lock(_global_mutex);
+        std::scoped_lock global_lock(_global_mutex);
 
         auto it = _operations.find(tag);
         if (it != _operations.end() && it->second == op_context) {
@@ -102,7 +102,7 @@ class Throttle {
    * The on_after callback will NOT be executed.
    */
   static auto cancel(const std::string& tag) -> void {
-    std::lock_guard<std::mutex> lock(_global_mutex);
+    std::scoped_lock lock(_global_mutex);
 
     auto it = _operations.find(tag);
     if (it != _operations.end()) {
@@ -111,7 +111,7 @@ class Throttle {
       _operations.erase(it);
 
       {
-        std::lock_guard<std::mutex> op_lock(op_context->mtx);
+        std::scoped_lock op_lock(op_context->mtx);
         op_context->is_cancelled = true;
       }
       op_context->cv.notify_one();
@@ -119,7 +119,7 @@ class Throttle {
   }
 
   static auto is_active(const std::string& tag) -> bool {
-    std::lock_guard<std::mutex> lock(_global_mutex);
+    std::scoped_lock lock(_global_mutex);
     return _operations.find(tag) != _operations.end();
   }
 
@@ -128,10 +128,10 @@ class Throttle {
    * Test-only helper for isolating test cases; not part of the supported API.
    */
   static void reset_for_testing() {
-    std::lock_guard<std::mutex> lock(_global_mutex);
+    std::scoped_lock lock(_global_mutex);
     for (auto& [tag, op] : _operations) {
       {
-        std::lock_guard<std::mutex> op_lock(op->mtx);
+        std::scoped_lock op_lock(op->mtx);
         op->is_cancelled = true;
       }
       op->cv.notify_one();
