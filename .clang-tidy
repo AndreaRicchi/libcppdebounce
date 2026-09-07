@@ -64,4 +64,4 @@ CheckOptions:
   - key: readability-identifier-naming.EnumConstantPrefix
     value: 'k'
   - key: readability-identifier-naming.NamespaceCase
-    value: CamelCase
+    value: lower_case
