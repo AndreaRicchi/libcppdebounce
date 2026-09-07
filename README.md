@@ -35,8 +35,8 @@ include(FetchContent)
 FetchContent_Declare(
 	cppdebounce
 	GIT_REPOSITORY https://github.com/AndreaRicchi/libcppdebounce.git
-	GIT_TAG vMAJOR.MINOR.PATCH
-	FIND_PACKAGE_ARGS MAJOR.MINOR CONFIG
+	GIT_TAG v0.1.0
+	FIND_PACKAGE_ARGS 0.1 CONFIG
 	)
 FetchContent_MakeAvailable(cppdebounce)
 

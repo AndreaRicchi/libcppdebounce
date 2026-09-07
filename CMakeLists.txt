@@ -6,7 +6,7 @@ include(prelude)
 
 project(
   cppdebounce
-  VERSION 0.0.1
+  VERSION 0.1.0
   LANGUAGES CXX)
 
 string(TOUPPER "${PROJECT_NAME}" PROJECT_NAME_UPPER)
